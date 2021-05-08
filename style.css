@@ -1,6 +1,22 @@
 body {
     background-color: #cfdbd5;
-    font-size: 50px;
+}
+
+button {
+    border-style: none;
+    box-sizing: border-box;
+    font-size: 1.5em;
+    padding: 0px;
+}
+
+.num-symbol {
+    background-color: #242423;
+    color: #e8eddf;
+}
+
+.symbol{
+    background-color: #333533;
+    color: #006ba6;
 }
 
 #container {
@@ -11,42 +27,28 @@ body {
     justify-content: center;
 }
 
-.num-symbol {
-    color: #e8eddf;
-}
-
-button {
-    background-color: #242423;
-    border-style: none;
-    box-sizing: border-box;
-}
-
-button .symbol{
-    background-color: #333533;
-    border-style: none;
-    box-sizing: border-box;
-}
-
 #calculator {
     display: grid;
+    box-sizing: border-box;
     grid-template-columns: '1fr 1fr 1fr 1fr';
     grid-template-rows: '1fr 1fr 1fr 1fr 1fr 1fr';
     gap: '2px 2px';
     grid-template-areas:
         'display display display display'
-        'clear   divide  times   backspace'
+        'clear   divide  multiplication  backspace'
         'seven   eight   nine    minus'
         'four    five    six     plus'
         'one     two     three   equals'
         '.       z    point   equals';
-    height: 500px;
-    width: 400px;
+    height: 450px;
+    width: 350px;
     background-color: #242423;
     padding:2px;
+    font-size: 1em;
 }
 
 #display {
-    background-color: #333533;
+    background-color: #242423;
     grid-area: display;
 }
 
@@ -98,8 +100,8 @@ button .symbol{
     grid-area: divide;
 }
 
-#times {
-    grid-area: times;
+#multiplication {
+    grid-area: multiplication;
 }
 
 #backspace {
