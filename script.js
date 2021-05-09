@@ -1,5 +1,6 @@
 const display = document.querySelector('#display p');
 const numBtn = document.querySelectorAll('.num-symbol');
+const clearBtn = document.querySelector('#clear');
 let displayText = '';
 
 //operator functions
@@ -39,7 +40,13 @@ const operate = function(num1, op, num2) {
 //Display
 
 const enterDigit = function() {
-    alert(this);
+    displayText = this.textContent;
+    display.textContent += displayText;
 }
 
-numBtn.forEach(element => addEventListener('click', enterDigit));
+numBtn.forEach(element => element.addEventListener('click', enterDigit));
+
+clearBtn.addEventListener('click', () => {
+    display.textContent = '';
+    displayText = '';
+})
