@@ -30,28 +30,28 @@ const operate = function() {
     if (num1 && num2) {
     switch(operator) {
         case '＋':
-            display.textContent = add(num1, num2);
-            num1 = add(num1, num2);
+            num1 = add(num1, num2).toString();
             num2 = '';
             operator = '';
+            display.textContent = num1;
             break;
         case '－':
-            display.textContent = subtract(num1, num2);
-            num1 = subtract(num1, num2);
+            num1 = subtract(num1, num2).toString();
             num2 = '';
             operator = '';
+            display.textContent = num1;
             break;
         case '×':
-            display.textContent = multiply(num1, num2);
-            num1 = multiply(num1, num2);
+            num1 = multiply(num1, num2).toString();
             num2 = '';
             operator = '';
+            display.textContent = num1;
             break;
         case '÷':
-            display.textContent = divide(num1, num2);
-            num1 = divide(num1, num2);
+            num1 = divide(num1, num2).toString();
             num2 = '';
             operator = '';
+            (num1 === Infinity) ? display.textContent = 'To infinity, and beyond!' : display.textContent = num1;
             break;
     }
     }
@@ -60,7 +60,9 @@ const operate = function() {
 //Display
 
 const enterDigit = function() {
-    if (!operator) {
+    if (this.textContent === '.' && display.textContent.charAt(display.textContent.length - 1) === '.') {
+        return;
+    } else if (!operator) {
         num1 += this.textContent;
         display.textContent += this.textContent;
     } else if (operator) {
@@ -73,6 +75,10 @@ const enterOperator = function() {
     if (!operator && num1) {
         operator = this.textContent;
         display.textContent += this.textContent;
+    } else if (num2) {
+        operate();
+        operator = this.textContent;
+        display.textContent += operator;
     }
 }
 
