@@ -79,10 +79,12 @@ const enterOperator = function() {
 const backSpace = function() {
     display.textContent = display.textContent.slice(0, display.textContent.length - 1);
     if (num2) {
+        num2 = num2.toString();
         num2 = num2.slice(0, num2.length -1)
     } else if (operator) {
         operator = '';
     } else if (num1) {
+        num1 = num1.toString();
         num1 = num1.slice(0, num1.length - 1)
     }
 }
