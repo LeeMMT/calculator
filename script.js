@@ -39,7 +39,7 @@ const operate = function(num1, op, num2) {
 //Display
 
 const enterDigit = function() {
-    alert(numBtn.textContent);
+    alert(this);
 }
 
 numBtn.forEach(element => addEventListener('click', enterDigit));
