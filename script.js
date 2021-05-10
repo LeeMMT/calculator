@@ -51,7 +51,7 @@ const operate = function() {
             num1 = divide(num1, num2).toString();
             num2 = '';
             operator = '';
-            (num1 === Infinity) ? display.textContent = 'To infinity, and beyond!' : display.textContent = num1;
+            display.textContent = num1;
             break;
     }
     }
@@ -59,16 +59,20 @@ const operate = function() {
 
 //Display
 
-const enterDigit = function() {
-    if (this.textContent === '.' && display.textContent.charAt(display.textContent.length - 1) === '.') {
-        return;
-    } else if (!operator) {
+const enterDigit = function(e) {
+    if (!operator) {
+        if (this.textContent === '.' && num1.includes('.')) {
+            return;
+        }
         num1 += this.textContent;
         display.textContent += this.textContent;
     } else if (operator) {
+        if (this.textContent === '.' && num2.includes('.')) {
+            return;
+        }
         num2 += this.textContent;
         display.textContent += this.textContent;
-    }
+        }
 }
 
 const enterOperator = function() {
@@ -113,3 +117,15 @@ equalsBtn.addEventListener('click', operate);
 backSpaceBtn.addEventListener('click', backSpace);
 
 clearBtn.addEventListener('click', clearDisplay);
+
+window.addEventListener('keydown', e => {
+    if (e.key >= 0 && e.key <= 10) {
+        if (!operator) {
+            num1 += e.key;
+            display.textContent += e.key;
+        } else if (operator) {
+            num2 += e.key;
+            display.textContent += e.key;
+            }
+    }
+})
