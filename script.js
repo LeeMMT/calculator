@@ -1,9 +1,11 @@
+const darkBtns = document.querySelectorAll('.num-symbol, .minus-plus-btn');
 const display = document.querySelector('#display p');
 const numBtn = document.querySelectorAll('.num-symbol');
 const operatorBtn = document.querySelectorAll('.operator-symbol');
 const equalsBtn = document.querySelector('#equals');
 const backSpaceBtn = document.querySelector('#backspace');
 const clearBtn = document.querySelector('#clear');
+const minusPlusBtn = document.querySelector('#minus-plus-btn');
 const allowedDigitKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
 const allowedOperatorKeys = ['+', '＋', '-', '－', '×', 'x', 'X', '÷', '/'];
 let num1 = '';
@@ -116,6 +118,10 @@ const clearDisplay = function() {
     operator = '';
 }
 
+const btnPress = function() {
+
+}
+
 //Keyboard support
 
 const keySupport = function(e) {
@@ -156,3 +162,5 @@ backSpaceBtn.addEventListener('click', backSpace);
 clearBtn.addEventListener('click', clearDisplay);
 
 window.addEventListener('keydown', keySupport);
+
+darkBtns.forEach(element => element.addEventListener('click', btnPress))
