@@ -4,6 +4,8 @@ const operatorBtn = document.querySelectorAll('.operator-symbol');
 const equalsBtn = document.querySelector('#equals');
 const backSpaceBtn = document.querySelector('#backspace');
 const clearBtn = document.querySelector('#clear');
+const allowedDigitKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
+const allowedOperatorKeys = ['+', '＋', '-', '－', '×', 'x', 'X', '÷', '/'];
 let num1 = '';
 let operator = '';
 let num2 = '';
@@ -30,28 +32,36 @@ const operate = function() {
     if (num1 && num2) {
     switch(operator) {
         case '＋':
+        case '+':
             num1 = add(num1, num2).toString();
             num2 = '';
             operator = '';
             display.textContent = num1;
             break;
         case '－':
+        case '-':
             num1 = subtract(num1, num2).toString();
             num2 = '';
             operator = '';
             display.textContent = num1;
             break;
         case '×':
+        case 'x':
+        case 'X':
             num1 = multiply(num1, num2).toString();
             num2 = '';
             operator = '';
             display.textContent = num1;
             break;
         case '÷':
+        case '/':
             num1 = divide(num1, num2).toString();
             num2 = '';
             operator = '';
             display.textContent = num1;
+            break;
+        case '=':
+            operate();
             break;
     }
     }
@@ -78,7 +88,7 @@ const enterDigit = function(e) {
 const enterOperator = function() {
     if (!operator && num1) {
         operator = this.textContent;
-        display.textContent += this.textContent;
+        display.textContent += operator;
     } else if (num2) {
         operate();
         operator = this.textContent;
@@ -106,6 +116,33 @@ const clearDisplay = function() {
     operator = '';
 }
 
+//Keyboard support
+
+const keySupport = function(e) {
+    if (allowedDigitKeys.includes(e.key)) {
+        if (!operator) {
+            num1 += e.key;
+            display.textContent += e.key;
+        } else if (operator) {
+            num2 += e.key;
+            display.textContent += e.key;
+            }
+    } else if (allowedOperatorKeys.includes(e.key)) {
+        if (!operator && num1) {
+            operator = e.key;
+            display.textContent += e.key;
+        } else if (num2) {
+            operate();
+            operator = e.key;
+            display.textContent += operator;
+        }
+    } else if (e.key === '=' || e.key === 'Enter') {
+        operate();
+    } else if (e.key === 'Backspace') {
+        backSpace();
+    }
+}
+
 //Event listeners
 
 numBtn.forEach(element => element.addEventListener('click', enterDigit));
@@ -118,14 +155,4 @@ backSpaceBtn.addEventListener('click', backSpace);
 
 clearBtn.addEventListener('click', clearDisplay);
 
-window.addEventListener('keydown', e => {
-    if (e.key >= 0 && e.key <= 10) {
-        if (!operator) {
-            num1 += e.key;
-            display.textContent += e.key;
-        } else if (operator) {
-            num2 += e.key;
-            display.textContent += e.key;
-            }
-    }
-})
+window.addEventListener('keydown', keySupport);
