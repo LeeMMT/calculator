@@ -1,4 +1,4 @@
-const darkBtns = document.querySelectorAll('.num-symbol, .minus-plus-btn');
+const calculatorBtns = document.querySelectorAll('.num-symbol, .symbol, .operator-symbol, #minus-plus-btn');
 const display = document.querySelector('#display p');
 const numBtn = document.querySelectorAll('.num-symbol');
 const operatorBtn = document.querySelectorAll('.operator-symbol');
@@ -6,8 +6,20 @@ const equalsBtn = document.querySelector('#equals');
 const backSpaceBtn = document.querySelector('#backspace');
 const clearBtn = document.querySelector('#clear');
 const minusPlusBtn = document.querySelector('#minus-plus-btn');
-const allowedDigitKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
-const allowedOperatorKeys = ['+', '＋', '-', '－', '×', 'x', 'X', '÷', '/'];
+const keyObj = {
+    allowedDigitKeys: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'],
+    allowedOperatorKeys: ['+', '＋', '-', '－', '×', 'x', 'X', '÷', '/'],
+    1: '1',
+    2: '2',
+    3: '3',
+    4: '4',
+    5: '5',
+    6: '6',
+    7: '7',
+    8: '8',
+    9: '9',
+    0: '0',
+}
 let num1 = '';
 let operator = '';
 let num2 = '';
@@ -32,7 +44,7 @@ const divide = function(num1, num2) {
 
 const operate = function() {
     if (num1 && num2) {
-    switch(operator) {
+    switch (operator) {
         case '＋':
         case '+':
             num1 = add(num1, num2).toString();
@@ -118,14 +130,33 @@ const clearDisplay = function() {
     operator = '';
 }
 
-const btnPress = function() {
+const btnPress = function(e) {
+    if (this.classList.contains('num-symbol')) {
+        this.style.backgroundColor = '#30312E';
+        setTimeout(() => {this.style.backgroundColor = '#2A2A28'}, 125);
+    } else {
+        this.style.backgroundColor = '#3C3E3C';
+        setTimeout(() => {this.style.backgroundColor = '#30312E'}, 125);
+    }
+}
 
+const keyPress = function(e) {
+    if (keyObj.allowedDigitKeys.includes(e.key)) {
+        let btnToFlash = Array.from(calculatorBtns).filter(element => element.textContent === e.key);
+        btnToFlash[0].style.backgroundColor = '#30312E';
+        setTimeout(() => {btnToFlash[0].style.backgroundColor = '#2A2A28'}, 125);
+    } else if (keyObj.allowedOperatorKeys.includes(e.key)) {
+        let btnToFlash = Array.from(calculatorBtns).filter(element => element.textContent === e.key);
+        btnToFlash[0].style.backgroundColor = '#30312E';
+        setTimeout(() => {btnToFlash[0].style.backgroundColor = '#2A2A28'}, 125);
+    }
 }
 
 //Keyboard support
 
 const keySupport = function(e) {
-    if (allowedDigitKeys.includes(e.key)) {
+    keyPress(e);
+    if (keyObj.allowedDigitKeys.includes(e.key)) {
         if (!operator) {
             num1 += e.key;
             display.textContent += e.key;
@@ -133,7 +164,7 @@ const keySupport = function(e) {
             num2 += e.key;
             display.textContent += e.key;
             }
-    } else if (allowedOperatorKeys.includes(e.key)) {
+    } else if (keyObj.allowedOperatorKeys.includes(e.key)) {
         if (!operator && num1) {
             operator = e.key;
             display.textContent += e.key;
@@ -142,6 +173,7 @@ const keySupport = function(e) {
             operator = e.key;
             display.textContent += operator;
         }
+        
     } else if (e.key === '=' || e.key === 'Enter') {
         operate();
     } else if (e.key === 'Backspace') {
@@ -163,4 +195,4 @@ clearBtn.addEventListener('click', clearDisplay);
 
 window.addEventListener('keydown', keySupport);
 
-darkBtns.forEach(element => element.addEventListener('click', btnPress))
+calculatorBtns.forEach(element => element.addEventListener('click', btnPress));
