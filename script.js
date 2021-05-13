@@ -163,13 +163,10 @@ const keyPress = function(e) {
                 setTimeout(() => {calculatorBtns[2].style.backgroundColor = '#30312E'}, 100);
                 break;
             case '=':
+                case 'Enter':
                 equalsBtn.style.backgroundColor = '#3C3E3C';
                 setTimeout(() => {equalsBtn.style.backgroundColor = '#30312E'}, 100);
                 break;
-                case 'Enter':
-                    equalsBtn.style.backgroundColor = '#3C3E3C';
-                    setTimeout(() => {equalsBtn.style.backgroundColor = '#30312E'}, 100);
-                    break;
             case 'Backspace':
                 backSpaceBtn.style.backgroundColor = '#3C3E3C';
                 setTimeout(() => {backSpaceBtn.style.backgroundColor = '#30312E'}, 100);
