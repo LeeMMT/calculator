@@ -163,7 +163,6 @@ const keyPress = function(e) {
                 setTimeout(() => {calculatorBtns[2].style.backgroundColor = '#30312E'}, 100);
                 break;
             case '=':
-                case 'Enter':
                 equalsBtn.style.backgroundColor = '#3C3E3C';
                 setTimeout(() => {equalsBtn.style.backgroundColor = '#30312E'}, 100);
                 break;
@@ -211,7 +210,6 @@ const keySupport = function(e) {
     
     switch (e.key) {
         case '=':
-        case 'Enter':
             operate();
             break;
         case 'Backspace':
