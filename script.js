@@ -132,10 +132,10 @@ const clearDisplay = function() {
 const btnPress = function(e) {
     if (this.classList.contains('num-symbol')) {
         this.style.backgroundColor = '#30312E';
-        setTimeout(() => {this.style.backgroundColor = '#2A2A28'}, 125);
+        setTimeout(() => {this.style.backgroundColor = '#2A2A28'}, 100);
     } else {
         this.style.backgroundColor = '#3C3E3C';
-        setTimeout(() => {this.style.backgroundColor = '#30312E'}, 125);
+        setTimeout(() => {this.style.backgroundColor = '#30312E'}, 100);
     }
 }
 
@@ -146,33 +146,37 @@ const keyPress = function(e) {
     if (keyObj.allowedDigitKeys.includes(e.key)) {
         let btnToFlash = Array.from(calculatorBtns).filter(element => element.textContent === e.key);
         btnToFlash[0].style.backgroundColor = '#30312E';
-        setTimeout(() => {btnToFlash[0].style.backgroundColor = '#2A2A28'}, 125);
+        setTimeout(() => {btnToFlash[0].style.backgroundColor = '#2A2A28'}, 100);
     } else if (keyObj.allowedkeyPressOpKeys.includes(e.key)) {
         let btnToFlash = Array.from(calculatorBtns).filter(element => element.textContent === e.key);
         btnToFlash[0].style.backgroundColor = '#3C3E3C';
-        setTimeout(() => {btnToFlash[0].style.backgroundColor = '#30312E'}, 125);
+        setTimeout(() => {btnToFlash[0].style.backgroundColor = '#30312E'}, 100);
     } else {
         switch (e.key) {
             case '/':
                 calculatorBtns[1].style.backgroundColor = '#3C3E3C';
-                setTimeout(() => {calculatorBtns[1].style.backgroundColor = '#30312E'}, 125);
+                setTimeout(() => {calculatorBtns[1].style.backgroundColor = '#30312E'}, 100);
                 break;
             case 'x':
             case 'X':
                 calculatorBtns[2].style.backgroundColor = '#3C3E3C';
-                setTimeout(() => {calculatorBtns[2].style.backgroundColor = '#30312E'}, 125);
+                setTimeout(() => {calculatorBtns[2].style.backgroundColor = '#30312E'}, 100);
                 break;
             case '=':
                 equalsBtn.style.backgroundColor = '#3C3E3C';
-                setTimeout(() => {equalsBtn.style.backgroundColor = '#30312E'}, 125);
+                setTimeout(() => {equalsBtn.style.backgroundColor = '#30312E'}, 100);
                 break;
+                case 'Enter':
+                    equalsBtn.style.backgroundColor = '#3C3E3C';
+                    setTimeout(() => {equalsBtn.style.backgroundColor = '#30312E'}, 100);
+                    break;
             case 'Backspace':
                 backSpaceBtn.style.backgroundColor = '#3C3E3C';
-                setTimeout(() => {backSpaceBtn.style.backgroundColor = '#30312E'}, 125);
+                setTimeout(() => {backSpaceBtn.style.backgroundColor = '#30312E'}, 100);
                 break;
             case 'C':
                 clearBtn.style.backgroundColor = '#3C3E3C';
-                setTimeout(() => {clearBtn.style.backgroundColor = '#30312E'}, 125);
+                setTimeout(() => {clearBtn.style.backgroundColor = '#30312E'}, 100);
                 break;
         }
     }
