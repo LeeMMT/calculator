@@ -9,16 +9,7 @@ const minusPlusBtn = document.querySelector('#minus-plus-btn');
 const keyObj = {
     allowedDigitKeys: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'],
     allowedOperatorKeys: ['+', '＋', '-', '－', '×', 'x', 'X', '÷', '/'],
-    1: '1',
-    2: '2',
-    3: '3',
-    4: '4',
-    5: '5',
-    6: '6',
-    7: '7',
-    8: '8',
-    9: '9',
-    0: '0',
+    allowedkeyPressOpKeys: ['+', '-', 'c'],
 }
 let num1 = '';
 let operator = '';
@@ -40,6 +31,16 @@ const multiply = function(num1, num2) {
 
 const divide = function(num1, num2) {
     return +num1 / +num2;
+}
+
+const convert = function(num) {
+    if(num < 0) {
+        return Math.abs(+num);
+    } else if (num > 0) {
+        return num = `-${+num}`;
+    } else {
+        return 0;
+    }
 }
 
 const operate = function() {
@@ -73,9 +74,6 @@ const operate = function() {
             num2 = '';
             operator = '';
             display.textContent = num1;
-            break;
-        case '=':
-            operate();
             break;
     }
     }
@@ -141,14 +139,41 @@ const btnPress = function(e) {
 }
 
 const keyPress = function(e) {
+    if (keyObj.allowedDigitKeys.includes(!e.key)) {
+        return;
+    }
     if (keyObj.allowedDigitKeys.includes(e.key)) {
         let btnToFlash = Array.from(calculatorBtns).filter(element => element.textContent === e.key);
         btnToFlash[0].style.backgroundColor = '#30312E';
         setTimeout(() => {btnToFlash[0].style.backgroundColor = '#2A2A28'}, 125);
-    } else if (keyObj.allowedOperatorKeys.includes(e.key)) {
+    } else if (keyObj.allowedkeyPressOpKeys.includes(e.key)) {
         let btnToFlash = Array.from(calculatorBtns).filter(element => element.textContent === e.key);
-        btnToFlash[0].style.backgroundColor = '#30312E';
-        setTimeout(() => {btnToFlash[0].style.backgroundColor = '#2A2A28'}, 125);
+        btnToFlash[0].style.backgroundColor = '#3C3E3C';
+        setTimeout(() => {btnToFlash[0].style.backgroundColor = '#30312E'}, 125);
+    } else {
+        switch (e.key) {
+            case '/':
+                calculatorBtns[1].style.backgroundColor = '#3C3E3C';
+                setTimeout(() => {calculatorBtns[1].style.backgroundColor = '#30312E'}, 125);
+                break;
+            case 'x':
+            case 'X':
+                calculatorBtns[2].style.backgroundColor = '#3C3E3C';
+                setTimeout(() => {calculatorBtns[2].style.backgroundColor = '#30312E'}, 125);
+                break;
+            case '=':
+                equalsBtn.style.backgroundColor = '#3C3E3C';
+                setTimeout(() => {equalsBtn.style.backgroundColor = '#30312E'}, 125);
+                break;
+            case 'Backspace':
+                backSpaceBtn.style.backgroundColor = '#3C3E3C';
+                setTimeout(() => {backSpaceBtn.style.backgroundColor = '#30312E'}, 125);
+                break;
+            case 'C':
+                clearBtn.style.backgroundColor = '#3C3E3C';
+                setTimeout(() => {clearBtn.style.backgroundColor = '#30312E'}, 125);
+                break;
+        }
     }
 }
 
@@ -158,9 +183,15 @@ const keySupport = function(e) {
     keyPress(e);
     if (keyObj.allowedDigitKeys.includes(e.key)) {
         if (!operator) {
+            if (e.key === '.' && num1.includes('.')) {
+                return;
+            }
             num1 += e.key;
             display.textContent += e.key;
         } else if (operator) {
+            if (e.key === '.' && num2.includes('.')) {
+                return;
+            }
             num2 += e.key;
             display.textContent += e.key;
             }
@@ -174,10 +205,20 @@ const keySupport = function(e) {
             display.textContent += operator;
         }
         
-    } else if (e.key === '=' || e.key === 'Enter') {
-        operate();
-    } else if (e.key === 'Backspace') {
-        backSpace();
+    }
+    
+    switch (e.key) {
+        case '=':
+        case 'Enter':
+            operate();
+            break;
+        case 'Backspace':
+            backSpace();
+            break;
+        case 'c':
+        case 'C':
+            clearDisplay();
+            break;
     }
 }
 
