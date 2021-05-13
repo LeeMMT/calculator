@@ -33,13 +33,14 @@ const divide = function(num1, num2) {
     return +num1 / +num2;
 }
 
-const convert = function(num) {
-    if(num < 0) {
-        return Math.abs(+num);
-    } else if (num > 0) {
-        return num = `-${+num}`;
-    } else {
-        return 0;
+const convert = function() {
+    if (num2 && num2 < 0 || num2 > 0) {
+        (num2 < 0) ? num2 = Math.abs(+num2) : num2 = `-${num2}`;
+        display.textContent = `${num1}${operator}${num2}`;
+    } else if (num1 && !operator && (num1 < 0 || num1 > 0)) {
+        (num1 < 0) ? num1 = Math.abs(+num1) : num1 = `-${num1}`;
+        display.textContent = `${num1}${operator}${num2}`;
+        display.textContent = num1;
     }
 }
 
@@ -229,6 +230,8 @@ numBtn.forEach(element => element.addEventListener('click', enterDigit));
 operatorBtn.forEach(element => element.addEventListener('click', enterOperator));
 
 equalsBtn.addEventListener('click', operate);
+
+minusPlusBtn.addEventListener('click', convert);
 
 backSpaceBtn.addEventListener('click', backSpace);
 
