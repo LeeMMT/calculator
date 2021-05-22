@@ -27,16 +27,19 @@ button:focus {
 }
 
 #minus-plus-btn {
+    font-size: 1.9em;
     background-color: #30312E;
     color: #1D8ACB;
 }
 
 .symbol{
+    font-size: 1.9em;
     background-color: #30312E;
     color: #1D8ACB;
 }
 
 .operator-symbol{
+    font-size: 1.9em;
     background-color: #30312E;
     color: #1D8ACB;
 }
