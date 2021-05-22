@@ -12,9 +12,11 @@ button {
     border-color: #3C3E3C;
     font-size: 1.7em;
     font-family: Helvetica, Arial, sans-serif;
+    transition-duration: .25s;
 }
 
 button:hover {
+    background: linear-gradient(to top,rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     cursor: pointer;
 }
 
